@@ -5,43 +5,43 @@ class Program
 {
     static void Main()
     {
-        // Создаем XML документ
+        // РЎРѕР·РґР°РµРј XML РґРѕРєСѓРјРµРЅС‚
         XmlDocument doc = new XmlDocument();
-        // Создаем корневой элемент
+        // РЎРѕР·РґР°РµРј РєРѕСЂРЅРµРІРѕР№ СЌР»РµРјРµРЅС‚
         XmlElement root = doc.CreateElement("telef");
         doc.AppendChild(root);
-// Добавление строки, связывающей XML файл с CSS файлом        
+// Р”РѕР±Р°РІР»РµРЅРёРµ СЃС‚СЂРѕРєРё, СЃРІСЏР·С‹РІР°СЋС‰РµР№ XML С„Р°Р№Р» СЃ CSS С„Р°Р№Р»РѕРј        
 XmlProcessingInstruction pi = doc.CreateProcessingInstruction("xml-stylesheet", "type=\"text/css\" href=\"tt.css\"");
         doc.AppendChild(pi);
-        // Читаем данные из файла "phones.txt"
+        // Р§РёС‚Р°РµРј РґР°РЅРЅС‹Рµ РёР· С„Р°Р№Р»Р° "phones.txt"
         string[] lines = File.ReadAllLines("phones.txt");
         foreach (string line in lines)
         {
-            // Создаем вложенный элемент tele
+            // РЎРѕР·РґР°РµРј РІР»РѕР¶РµРЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ tele
             XmlElement phone = doc.CreateElement("tele");
             root.AppendChild(phone);
-            // Разделяем строку на поля
+            // Р Р°Р·РґРµР»СЏРµРј СЃС‚СЂРѕРєСѓ РЅР° РїРѕР»СЏ
             string[] fields = line.Split(
 );
-            // Добавляем элементы в тег tele
-            phone.AppendChild(CreateElementWithText(doc, "Название", fields[0].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "изготовитель", fields[1].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "цвет", fields[2].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "тип_экрана", fields[3].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "размер_корпуса", fields[4].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "год_изготовления", fields[5].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "время_зарядки", fields[6].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "время_работы_в_ожидании", fields[7].Trim()));
-            phone.AppendChild(CreateElementWithText(doc, "чехол", fields[8].Trim()));
+            // Р”РѕР±Р°РІР»СЏРµРј СЌР»РµРјРµРЅС‚С‹ РІ С‚РµРі tele
+            phone.AppendChild(CreateElementWithText(doc, "РќР°Р·РІР°РЅРёРµ", fields[0].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "РёР·РіРѕС‚РѕРІРёС‚РµР»СЊ", fields[1].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "С†РІРµС‚", fields[2].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "С‚РёРї_СЌРєСЂР°РЅР°", fields[3].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "СЂР°Р·РјРµСЂ_РєРѕСЂРїСѓСЃР°", fields[4].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "РіРѕРґ_РёР·РіРѕС‚РѕРІР»РµРЅРёСЏ", fields[5].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "РІСЂРµРјСЏ_Р·Р°СЂСЏРґРєРё", fields[6].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "РІСЂРµРјСЏ_СЂР°Р±РѕС‚С‹_РІ_РѕР¶РёРґР°РЅРёРё", fields[7].Trim()));
+            phone.AppendChild(CreateElementWithText(doc, "С‡РµС…РѕР»", fields[8].Trim()));
         }
-        // Сохраняем XML документ в файл
-        doc.Save("Телефоны.xml");
-        // Создаем CSS файл
-        string css = "telef {display: table; width: 100%; border-collapse: collapse; background-color: #DB7093; } tele { display: table-row; } tele:nth-child(even) {background-color: #FFA07A;} tele:nth-child(odd) { background-color: #DB7093;} Название, изготовитель, цвет, тип_экрана, размер_корпуса, год_изготовления, время_зарядки, время_работы_в_ожидании, чехол { color: red; display: table-cell; padding: 15px; text-align: left; border-bottom: 1px solid #ddd;}";
+        // РЎРѕС…СЂР°РЅСЏРµРј XML РґРѕРєСѓРјРµРЅС‚ РІ С„Р°Р№Р»
+        doc.Save("РўРµР»РµС„РѕРЅС‹.xml");
+        // РЎРѕР·РґР°РµРј CSS С„Р°Р№Р»
+        string css = "telef {display: table; width: 100%; border-collapse: collapse; background-color: #DB7093; } tele { display: table-row; } tele:nth-child(even) {background-color: #FFA07A;} tele:nth-child(odd) { background-color: #DB7093;} РќР°Р·РІР°РЅРёРµ, РёР·РіРѕС‚РѕРІРёС‚РµР»СЊ, С†РІРµС‚, С‚РёРї_СЌРєСЂР°РЅР°, СЂР°Р·РјРµСЂ_РєРѕСЂРїСѓСЃР°, РіРѕРґ_РёР·РіРѕС‚РѕРІР»РµРЅРёСЏ, РІСЂРµРјСЏ_Р·Р°СЂСЏРґРєРё, РІСЂРµРјСЏ_СЂР°Р±РѕС‚С‹_РІ_РѕР¶РёРґР°РЅРёРё, С‡РµС…РѕР» { color: red; display: table-cell; padding: 15px; text-align: left; border-bottom: 1px solid #ddd;}";
         File.WriteAllText("tt.css", css);
-        Console.WriteLine("Файлы успешно созданы.");
+        Console.WriteLine("Р¤Р°Р№Р»С‹ СѓСЃРїРµС€РЅРѕ СЃРѕР·РґР°РЅС‹.");
     }
-    // Вспомогательная функция для создания элемента с текстом
+    // Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ СЌР»РµРјРµРЅС‚Р° СЃ С‚РµРєСЃС‚РѕРј
     static XmlElement CreateElementWithText(XmlDocument doc, string elementName, string text)
     {
         XmlElement element = doc.CreateElement(elementName);
